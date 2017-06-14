@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\siguiete_paciente;
 use App\Http\Controllers\Controller;
 
@@ -23,4 +25,11 @@ class EtapaPacienteController extends Controller
         $datos = array('paciente' => 'miguel', 'expediente'=> 'EX-1215658', 'consultorio' => 'Consultorio 5');
         return $datos;
     }
+
+    public function salesforce(Request $request)
+    {
+        return $request;
+    }
+
+
 }

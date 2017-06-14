@@ -24,3 +24,5 @@ $app->get('/', function () use ($app) {
 // });
 
 $app->post('/monitor', 'EtapaPacienteController@show');
+
+$app->post('/salesforce', 'EtapaPacienteController@salesforce');
