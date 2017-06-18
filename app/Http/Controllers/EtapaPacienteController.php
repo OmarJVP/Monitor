@@ -41,27 +41,15 @@ class EtapaPacienteController extends Controller
         $urgente=$request['urgente'];
 
         
-        $pacientes = DB::table('paciente')->get();
+         // DB::insert('insert into paciente (nombre,expediente, consultorio, estatus, etapa, clinica, hora_llegada, hora_creacion, urgente) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', [$paciente,$expediente,$consultorio,$estatus,$etapa,$clinica,$hora_llegada,$fecha_creacion,$urgente]);
 
-        foreach ($pacientes as $p) {
-            $exp=$p->expediente;
-            $et=$p->etapa;
-
-            if($exp!=$expediente){
-                // DB::insert('insert into paciente (nombre,expediente, consultorio, estatus, etapa, clinica, hora_llegada, hora_creacion, urgente) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', [$paciente,$expediente,$consultorio,$estatus,$etapa,$clinica,$hora_llegada,$fecha_creacion,$urgente]);
-                return "Expediente diferente";
-            }
-            elseif($exp==$expediente && $et!=$etapa){
-                // DB::insert('insert into paciente (nombre,expediente, consultorio, estatus, etapa, clinica, hora_llegada, hora_creacion, urgente) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', [$paciente,$expediente,$consultorio,$estatus,$etapa,$clinica,$hora_llegada,$fecha_creacion,$urgente]);
-                return "Expediente igual y etapa diferente";
-            }
-            else{
-                return "Ninguno de los anteriores";
-            }
+        $registro = DB::table('paciente')->where('expediente', $expediente)->first();
+        
+        if(!isset($registro)){
+            DB::insert('insert into paciente (nombre,expediente, consultorio, estatus, etapa, clinica, hora_llegada, hora_creacion, urgente) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', [$paciente,$expediente,$consultorio,$estatus,$etapa,$clinica,$hora_llegada,$fecha_creacion,$urgente]);
+            return "No existia el expediente";
         }
 
-        
-        
 /*
         $response = json_decode($request, true);
 
