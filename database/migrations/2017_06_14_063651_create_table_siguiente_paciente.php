@@ -13,14 +13,16 @@ class CreateTableSiguientePaciente extends Migration
      */
     public function up()
     {
-        Schema::create('siguiete_paciente', function (Blueprint $table) {
+        Schema::create('paciente', function (Blueprint $table) {
             $table->increments('id');
             $table->string('paciente');
-            $table->string('consultorio');
             $table->string('expediente');
-            $table->string('visita');
+            $table->string('consultorio');
             $table->string('estatus');
             $table->string('etapa');
+            $table->sting('clinica');
+            $table->string('hora_llegada');
+            $table->string('fecha_creacion');
         });
     }
 
