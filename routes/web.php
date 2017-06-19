@@ -23,6 +23,6 @@ $app->get('/', function () use ($app) {
 // 	return ("Que onda!");
 // });
 
-$app->post('/monitor', 'EtapaPacienteController@show');
+$app->get('/monitor', 'EtapaPacienteController@show');
 
 $app->post('/salesforce', 'EtapaPacienteController@salesforce');

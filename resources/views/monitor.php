@@ -97,26 +97,18 @@
                     <th>Expediente</th>
                     <th>Paciente</th>
                   </tr>
-                  <tr>
-                    <td>EX-021505</td>
-                    <td>Rodolfo Alvares</td>
-                  </tr>
-                  <tr>
-                    <td>EX-021505</td>
-                    <td>Rodolfo Alvares</td>
-                  </tr>
-                  <tr>
-                    <td>EX-021505</td>
-                    <td>Rodolfo Alvares</td>
-                  </tr>
-                  <tr>
-                    <td>EX-021505</td>
-                    <td>Rodolfo Alvares</td>
-                  </tr>
-                  <tr>
-                    <td>EX-021505</td>
-                    <td>Rodolfo Alvares</td>
-                  </tr>
+                  <?php foreach ($pacientes as $paciente): ?>
+                    <tr>
+                      <td>
+                        <?=$paciente['expediente']?>
+                      </td>
+                      <td>
+                        <?=$paciente['nombre']?>
+                      </td>
+                    </tr>
+                  <?php endforeach ?>
+
+                  
                 </table>
             </div>
           </div>

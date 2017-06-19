@@ -18,13 +18,8 @@ class EtapaPacienteController extends Controller
      */
     public function show()
     {
-        //$datosdb = DB::table('siguiete_paciente')->first();
-        // $datosdb = DB::table('siguiete_paciente')->where('id', '1')->first();
-        //echo $datosdb;
-        //$datos = array('paciente' => 'miguel', 'expediente'=> 'EX-1215658', 'consultorio' => 'Consultorio 5');
-        $results = DB::select("SELECT post AS paciente FROM siguiete_paciente LIMIT 1");
-        //DB::insert('insert into prueba_post (post) values (?)', ['Omar']);
-        return $results;
+       $lista_pacientes=DB::table('paciente')->get();
+       return view('monitor', ['paciente' => $paciente]);
     }
 
     public function salesforce(Request $request)
@@ -44,11 +39,13 @@ class EtapaPacienteController extends Controller
          // DB::insert('insert into paciente (nombre,expediente, consultorio, estatus, etapa, clinica, hora_llegada, hora_creacion, urgente) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', [$paciente,$expediente,$consultorio,$estatus,$etapa,$clinica,$hora_llegada,$fecha_creacion,$urgente]);
 
         $registro = DB::table('paciente')->where('expediente', $expediente)->first();
+
         
         if(!isset($registro)){
             DB::insert('insert into paciente (nombre,expediente, consultorio, estatus, etapa, clinica, hora_llegada, hora_creacion, urgente) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', [$paciente,$expediente,$consultorio,$estatus,$etapa,$clinica,$hora_llegada,$fecha_creacion,$urgente]);
             return "No existia el expediente";
         }
+
 
 /*
         $response = json_decode($request, true);
