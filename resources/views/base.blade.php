@@ -36,33 +36,8 @@
           color:#FFFFFF;
       }
     </style>
-    <script>
-      $(document).ready(function() {
-        var url      = window.location.href;
-        url = url+'monitor';
-          function getValues(){
-            $.ajax({
-              method: 'post',
-              url: url,
-              data: {'clinica' : 'coyoacan',
-                      'Etapa' : 'Preparacion'
-                    },
-              success: function(data){
-                $('#paciente').text(data['paciente']);
-                $('#expediente').text(data['expediente']);
-                $('#consultorio').text(data['consultorio']);
-                  console.log('data:'+data);
-              },
-              error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-                  console.log(JSON.stringify(jqXHR));
-                  console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-              }
-            });
-          }
 
-          setInterval(getValues, 3000);
-      });
-    </script>
+
   </head>
   <body>
     <div class="container-fluid">
@@ -71,14 +46,15 @@
           <div class="panel fondo-verde">
             <div class="panel-body">
               <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/videoseries?list=PL8955E75A5DB72E0F&amp;controls=0" frameborder="0" allowfullscreen></iframe>
+                @yield('video')
               </div>
             </div>
           </div>
           <div class="panel fondo-amarillo">
-            <div class="panel-body text-center">
-                <h1 id="paciente">-----<br><small id="expediente">-----</small></h1>
-                <h1 id="consultorio">-----</h1>
+            <div id="principalPanel" class="panel-body text-center">
+              @yield('content')
+            
+              
             </div>
           </div>
         </div>
@@ -97,17 +73,7 @@
                     <th>Expediente</th>
                     <th>Paciente</th>
                   </tr>
-                  <?php foreach ($pacientes as $paciente): ?>
-                    <tr>
-                      <td>
-                        <?=$paciente['expediente']?>
-                      </td>
-                      <td>
-                        <?=$paciente['nombre']?>
-                      </td>
-                    </tr>
-                  <?php endforeach ?>
-
+                 @yield('listaespera')
                   
                 </table>
             </div>
@@ -118,5 +84,47 @@
         </div>
       </div>
     </div>
+
+    <script>
+  //   $(document).ready(function() {  
+  //     function ajaxRenderSection() {
+  //       // $.ajax({
+  //       //     type: 'GET',
+  //       //     url: '/lista_paciente',
+  //       //     success: function (data) {
+  //       //         $('#principalPanel').empty(); //se toma la data en formato json, luego se borra el Div padre de el Sections y se pinta el json (data) como htlm
+  //       //     },
+  //       //     error: function (data) {
+  //       //         var errors = data;
+  //       //         // if (errors) {
+  //       //         //     $.each(errors, function (i) {
+  //       //         //         console.log(errors[i]);
+  //       //         //     });
+  //       //         // }
+  //       //         console.log(errors);
+  //       //     }
+  //       // });
+  //       $.get('/test', function(){ 
+  //       console.log('response'); 
+  //   });
+  //   }
+
+  //   setInterval(ajaxRenderSection(), 3000);
+  //   console.log("ready");
+  // });
+   $(document).ready(function(){
+   var refreshId = setInterval(refrescarTabla, 6000);
+   $.ajaxSetup({ cache: false });
+ });
+   function refrescarTabla() {
+    // $('div#principalPanel').empty();
+    $('div#principalPanel').load('test');
+  // $("#salastatus").load('estadoSala.do?randval='+ Math.random() + " #resulttable", function(){
+  // //     //aquí puedes meter más código si necesitas;
+  // //     $("#salastatus").css('opacity', 1);
+  // //     $("#rolling").toggle();
+  // // });
+}
+    </script>
   </body>
 </html>

@@ -23,6 +23,12 @@ $app->get('/', function () use ($app) {
 // 	return ("Que onda!");
 // });
 
+$app->get('/test', 'EtapaPacienteController@test');
+
+$app->get('/eliminar', 'EtapaPacienteController@eliminar');
+
 $app->get('/monitor', 'EtapaPacienteController@show');
+
+$app->get('/lista_paciente', 'EtapaPacienteController@lista');
 
 $app->post('/salesforce', 'EtapaPacienteController@salesforce');
